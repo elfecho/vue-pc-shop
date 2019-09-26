@@ -1,0 +1,3 @@
+INSERT INTO `goods` (`id`, `name`, `img`, `typeId`, `desc`, `updatetime`, `createtime`) VALUES (1, '森威服装', 'https://weiquan.senwell.cn/Public/uploads/1/COMPANY_LOGO/20190624/5d10c1f822950.png', 1, 'desc', NULL, NULL);
+INSERT INTO `goods` (`id`, `name`, `img`, `typeId`, `desc`, `updatetime`, `createtime`) VALUES (2, '百果园', 'https://weiquan.senwell.cn/Public/uploads/33/COMPANY_LOGO/20190703/5d1c46ef95001.png', 1, '自购买之日起30日内有效', NULL, NULL);
+INSERT INTO `goods` (`id`, `name`, `img`, `typeId`, `desc`, `updatetime`, `createtime`) VALUES (3, '保兰德', 'https://weiquan.senwell.cn/Public/uploads/56/COMPANY_LOGO/20190805/5d47a2d9c731a.jpg', 2, '888', NULL, NULL);
