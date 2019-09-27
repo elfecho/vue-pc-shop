@@ -11,6 +11,9 @@ const mall = require('./routes/mall');
 const user = require('./routes/user');
 const admin = require('./routes/admin');
 
+// logger
+const logsUtil = require('./utils/logs.js');
+
 // error handler
 onerror(app);
 
@@ -32,10 +35,18 @@ app.use(require('koa-static')(__dirname + '/public'));
 
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+  const start = new Date();      // 响应开始时间
+  let intervals;                 // 响应间隔时间
+  try {
+      await next();
+      intervals = new Date() - start;
+      console.log(`${ctx.method} ${ctx.url} - ${intervals}ms`)
+      logsUtil.logResponse(ctx, intervals);     //记录响应日志
+      
+  } catch (error) {
+      intervals = new Date() - start;
+      logsUtil.logError(ctx, error, intervals);//记录异常日志
+  }
 });
 
 

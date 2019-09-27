@@ -107,9 +107,6 @@ export default {
         alert(e);
       })
     },
-    navTo(route){
-      this.$router.push(route);
-    },
     settleAccounts(){
       let cartList = [];
       this.orderList.map((item,index)=>{

@@ -29,9 +29,6 @@ export default {
   },
 
   methods:{
-    navTo(route){
-      this.$router.push(route)
-    },
   },
 
   mounted(){

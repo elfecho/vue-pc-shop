@@ -177,9 +177,6 @@ export default {
         return item.typeId===typeid;
       });
     },
-    navTo(route){
-      this.$router.push(route);
-    },
     selectType(typeId){
       if(typeId==-1){
         return;
@@ -192,13 +189,8 @@ export default {
         this.goodsList = data;
       })
       .catch((e)=>{
-        alert(e);
+        // alert(e);
       })
-    },
-    searchTip(tip){
-      alert(tip)
-    },
-    inputTextChange(text){
     },
     scrollHandle(){
       const top = this.$refs.typeList.getBoundingClientRect().top;

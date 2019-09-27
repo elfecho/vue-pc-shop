@@ -2,7 +2,7 @@
   <div class="Mall">
     <header>
       <div class="container clear">
-        <span class="title" @click="navTo('/mall')">MoreMall 一站式选购平台</span>
+        <span class="title" @click="navTo('/mall')">网云商城平台</span>
         <NoticeList :notices="notices"/>
         <div class="right" v-if="clientToken">
           <span class="name">欢迎您，{{clientName}}</span>
@@ -22,9 +22,9 @@
       <div class="fixedAd">
         <img src="../../assets/img/index2.gif" alt="" />
         <ul class="fixedList">
-          <li>
+          <li @click="navTo('/mall/personal/cart')">
             <i class="iconfont icon-collection_fill" />
-            <span>新人有礼</span>
+            <span>购物车</span>
           </li>
           <li>
             <i class="iconfont icon-paixing-copy" />
@@ -128,9 +128,6 @@ export default {
     ...mapMutations({
       clientLogout: 'CLIENT_LOGOUT',
     }),
-    navTo(route){
-      this.$router.push(route)
-    },
     logout(){
       this.clientLogout();
       this.$router.go(0);
@@ -168,7 +165,7 @@ export default {
     height:38px;
     color:@fontShallowColor;
     user-select:none;
-    z-index: 10000;
+    z-index: 88;
     position: absolute;
     left: 0;
     top: 0;

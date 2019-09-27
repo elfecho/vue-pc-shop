@@ -7,17 +7,18 @@
         <span @click="setIndex(1)" :class="{selected:curIndex===1}">注册</span>
       </div>
       <div class="formBox" v-show="curIndex===0">
-        <input ref="account" type="text" placeholder="账号" />
+        <input ref="account" type="text" placeholder="手机号码" />
         <input ref="pwd" type="password" placeholder="密码" />
         <button @click="login">登录</button>
       </div>
       <div class="formBox" v-show="curIndex===1">
-        <input ref="signEmail" type="text" placeholder="请输入注册的邮箱" />
+        <input ref="signPhone" type="text" placeholder="请输入联系电话" />
         <input ref="signName" type="text" placeholder="请输入昵称" />
         <input ref="signPwd" type="password" placeholder="请输入密码" />
-        <input ref="signRecipient" type="text" placeholder="请输入收件人姓名" />
-        <input ref="signAddress" type="text" placeholder="请输入收件地址" />
-        <input ref="signPhone" type="text" placeholder="请输入联系电话" />
+        <input ref="signRepeatPwd" type="password" placeholder="请再次输入密码" />
+        <!-- <input ref="signRecipient" type="text" placeholder="请输入收件人姓名" />
+        <input ref="signAddress" type="text" placeholder="请输入收件地址" /> -->
+        <!-- <input ref="signEmail" type="text" placeholder="请输入注册的邮箱" /> -->
         <button @click="signup">注册</button>
       </div>
     </div>
@@ -77,8 +78,8 @@ export default {
         email:this.$refs.signEmail.value,
         nickname:this.$refs.signName.value,
         pwd:this.$refs.signPwd.value,
-        recipient:this.$refs.signRecipient.value,
-        address:this.$refs.signAddress.value,
+        // recipient:this.$refs.signRecipient.value,
+        // address:this.$refs.signAddress.value,
         phone:this.$refs.signPhone.value,
       });
       res

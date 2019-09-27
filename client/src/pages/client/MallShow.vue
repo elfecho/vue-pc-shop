@@ -2,11 +2,12 @@
   <div class="MallShow">
     <FixedNav v-show="navShouldFixed">
       <div slot="navContent" class="container fixedNavContainer">
-        <h3 class="fixedLeft" @click="navTo('/mall/show/index')">MoreMall</h3>
+        <h3 class="fixedLeft" @click="navTo('/mall/show/index')">网云商城</h3>
         <ul class="fixedRight">
           <li 
             v-for="(item,index) in typeList" 
             :key="'type'+item.id" 
+            :id="item.id"
             :class="{selected:judgeCurPath(item.id)}"
             @click="selectType(item.id)"
           >
@@ -22,6 +23,7 @@
           placeholder="请输入商品关键字"
           :tips="tips"
           @tipsChosen="searchTip"
+          @inputEnter="searchConfirm"
           ref="TipsInput"
           v-model="searchText"
         />
@@ -43,10 +45,10 @@
 </template>
 
 <script>
-import {getTypes,getGoodsList} from '../../api/client';
+import {getTypes,getGoodsList,searchGoods} from '../../api/client';
 import TipsInput from '../../components/TipsInput';
 import FixedNav from '../../components/FixedNav';
-
+import {createDebouce} from '../../util/util';
 export default {
   name: 'MallShow',
   components:{
@@ -65,15 +67,13 @@ export default {
         name:'首页'
       }],
       searchText:'',
-      tips:['aa','bb','cc'],
+      tips:[],
       navShouldFixed:false,
+      debounce: createDebouce(1000)
     }
   },
 
   methods:{
-    navTo(route){
-      this.$router.push(route);
-    },
     judgeCurPath(typeId){
       if(typeId===-1){
         if(this.curPath.indexOf('/show/index')>-1){
@@ -90,6 +90,7 @@ export default {
       }
     },
     selectType(typeId){
+      console.log('typeId:::', typeId)
       //首页
       if(typeId===-1){
         this.navTo('/mall/show/index');
@@ -98,13 +99,30 @@ export default {
       }
     },
     searchTip(tip){
-      alert(tip)
+      this.navTo(`/mall/show/goodsList/0/${tip}`);
+    },
+    searchGoods(keyword){
+      const res = searchGoods(keyword);
+      res.then((data)=>{
+        if (data.length>0){
+          this.tips = data.map(item => {
+            return item.name
+          })
+        }
+      })
+      .catch((e)=>{
+        alert(e);
+      })
     },
     searchTextChange(text){
+      this.debounce(()=>{
+        // console.log('searchGoods', text)
+        this.searchGoods(text);
+      })
     },
     searchConfirm(){
       if(this.searchText.trim().length<=0){
-        alert('输入不能为空！');
+        this.$message.warning('输入不能为空！')
         return;
       }
       this.navTo(`/mall/show/goodsList/0/${this.searchText}`);

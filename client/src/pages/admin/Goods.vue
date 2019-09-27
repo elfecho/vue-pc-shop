@@ -102,9 +102,9 @@ export default {
   			alert(e);
   		})
   	},
-  	navTo(route){
-  		this.$router.push(route);
-  	},
+  	// navTo(route){
+  	// 	this.$router.push(route);
+  	// },
     deleteGoods(id){
       const res = deleteGoods(id);
       res

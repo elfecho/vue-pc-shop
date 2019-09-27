@@ -66,7 +66,7 @@ exports.login = async (ctx)=>{
     //看该邮箱是否已经注册
     const emailSigned = await UserModel.findOne({
         where: {
-          email: user.account
+          phone: user.account
         }
     })
 

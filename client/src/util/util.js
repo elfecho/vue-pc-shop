@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 //获取屏幕宽高
 export function getClientSize(){
     let h = document.documentElement.clientHeight || document.body.clientHeight;
@@ -115,4 +117,26 @@ export function shuffle(arr){
         arr[i] = itemAtIndex;
     }
     return arr;
+}
+
+// debounce - 去抖
+export function createDebouce(delay = 1000) {
+    let timer = null
+    return function debounce(fn){
+        // 打断
+        clearTimeout(timer)
+        // 重新计时
+        timer = setTimeout(()=>{
+            fn && fn()
+        }, delay)
+    }
+}
+
+// 跳转路由
+export function navTo(url){
+    console.log(Vue.$route)
+    // const path = Vue.prototype.$route.path
+    // if(url !== path) {
+    //     Vue.$router.push(route);
+    // }
 }

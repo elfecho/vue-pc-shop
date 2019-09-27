@@ -5,6 +5,7 @@
       type="text" 
       :placeholder="placeholder" 
       v-model="inputText"
+      @keyup.enter="inputEnter"
       class="tipsEle" 
     />
     <ul class="tipsBox tipsEle" v-show="tipsShow">
@@ -64,11 +65,17 @@ export default {
       }else{
         this.inputBoxFocus = false;
       }
+    },
+    inputEnter(e){
+      this.$emit('inputEnter')
     }
   },
   watch:{
     inputText(newVal,oldVal){
       this.$emit('input',newVal);
+    },
+    tips(newVal, oldVal) {
+      this.tips = newVal
     }
   }
 }

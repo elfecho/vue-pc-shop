@@ -31,7 +31,7 @@ export default {
   background-color: white;
   border-bottom: 1px solid @borderColor;
   animation: slideIn .3s;
-  z-index: 10000;
+  z-index: 888;
 }
 @keyframes slideIn{
   from{

@@ -30,10 +30,10 @@
             <span class="unitPrice">{{'￥'+item.goods.unitPrice}}</span>
             <span class="num">{{item.goodsNum}}</span>
             <span class="amount">{{'￥'+item.amount}}</span>
-            <button v-if="item.state===0" @click="confirmPay(item.id)">确认付款</button>
-            <button v-else-if="item.state===2" @click="confirmReceive(item.id)">确认收货</button>
-            <button v-else-if="item.state===3 && !item.hasComment" @click="showPopup(item.id,item.goods.id,item.goods.goodsDetailId)">评价</button>
-            <span class="hasComment" v-else-if="item.state===3 && item.hasComment">已评价</span>
+            <button v-if="item.state==0" @click="confirmPay(item.id)">确认付款</button>
+            <button v-else-if="item.state==2" @click="confirmReceive(item.id)">确认收货</button>
+            <button v-else-if="item.state==3 && !item.hasComment" @click="showPopup(item.id,item.goods.id,item.goods.goodsDetailId)">评价</button>
+            <span class="hasComment" v-else-if="item.state==3 && item.hasComment">已评价</span>
           </div>
         </li>
       </ul>
@@ -93,9 +93,6 @@ export default {
     changeIndex(i){
       this.curIndex = i;
       this.getOrderByState(this.curIndex-1);
-    },
-    navTo(route){
-      this.$router.push(route);
     },
     getOrderByState(state){
       const res = getOrderByState(state,this.clientToken);

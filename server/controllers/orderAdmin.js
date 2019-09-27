@@ -88,6 +88,7 @@ exports.getOrders = async (ctx)=>{
 				spec:spec.specName,
 				num:order.dataValues.goodsNum,
 				amount:order.dataValues.amount,
+				// state:order.dataValues.state,
 				state:order.dataValues.state===0?'未付款':order.dataValues.state===1?'未发货':order.dataValues.state===2?'已发货':'已到货',
 				time:moment(order.dataValues.updatetime).format('MM-DD HH:mm'),
 			})

@@ -60,12 +60,12 @@ export default {
     closeUserTips(){
       this.userTipsShow = false;
     },
-    navTo(route){
-      if(this.curPath===route){
-        return;
-      }
-      this.$router.push(route)
-    },
+    // navTo(route){
+    //   if(this.curPath===route){
+    //     return;
+    //   }
+    //   this.$router.push(route)
+    // },
     logout(){
       this.adminLogout();
       this.$router.push('/login');
