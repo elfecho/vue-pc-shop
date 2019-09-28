@@ -18,7 +18,7 @@
         <input ref="signRepeatPwd" type="password" placeholder="请再次输入密码" />
         <!-- <input ref="signRecipient" type="text" placeholder="请输入收件人姓名" />
         <input ref="signAddress" type="text" placeholder="请输入收件地址" /> -->
-        <!-- <input ref="signEmail" type="text" placeholder="请输入注册的邮箱" /> -->
+        <input ref="signEmail" type="text" placeholder="请输入注册的邮箱" />
         <button @click="signup">注册</button>
       </div>
     </div>

@@ -24,7 +24,9 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	-webkit-font-smoothing: antialiased;
 	line-height: 1;
+	font: 12px/1.5 Microsoft YaHei,tahoma,arial,Hevetica,sans-serif;
 }
 a {
     text-decoration:none;
@@ -70,6 +72,13 @@ button{
   display: table;
   content: '';
   clear: both;
+}
+.clearfix:after {
+	content:" ";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
 }
 .ellipsis{
 	overflow: hidden;

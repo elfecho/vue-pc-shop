@@ -16,6 +16,17 @@ router.post('/api/user/updateUserData', user.updateUserData);
 //更改用户密码
 router.post('/api/user/updatePwd', user.updatePwd);
 
+// 获取用户的收货地址
+router.get('/api/user/getAddress', user.getAddress)
+
+// 新增收货地址
+router.post('/api/user/featAddress', user.featAddress)
+
+// 修改收货地址deleteAddress
+router.post('/api/user/fixAddress', user.fixAddress)
+
+// 删除收货地址
+router.post('/api/user/deleteAddress', user.deleteAddress)
 /*
 //修改昵称
 router.post('/privateApi/user/setNickname',user.setNickname);

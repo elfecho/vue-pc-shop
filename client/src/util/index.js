@@ -4,6 +4,7 @@
 */
 const navTo = function(url) {
     const path = this.$route.path
+    console.log('path', path, url)
     if (url !== path) {
         this.$router.push(url);
     }

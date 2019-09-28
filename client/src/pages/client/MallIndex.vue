@@ -168,6 +168,7 @@ export default {
       h:0,
       m:0,
       s:0,
+      width: getClientSize().width
     }
   },
 
@@ -204,7 +205,6 @@ export default {
       }
     }
   },
-
   mounted(){
     //获取数据
     const res = getTypes();

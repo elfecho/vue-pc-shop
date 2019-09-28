@@ -474,3 +474,28 @@ export function searchGoods(keyword=''){
 	    })
 	})
 }
+
+//获得收货地址
+export function getAddrDate(token){
+	const res = axios.get('/api/user/getAddress?token='+token);
+	return new Promise((resolve,reject)=>{
+		res
+		.then((result)=>{
+	        if(result.status===200){
+	        	return result.data;
+	        }else{
+	        	reject(result.status)
+	        }
+	    })
+	    .then((json)=>{
+    		if(json.code===0){
+                resolve(json.data);
+            }else{
+                reject(json.message);
+            }
+    	})
+	    .catch((e)=>{
+	    	reject(e.toString())
+	    })
+	})
+}

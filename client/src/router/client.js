@@ -13,6 +13,7 @@ import Personal from '@/pages/client/Personal';
 import MyOrder from '@/pages/client/MyOrder';
 import MyData from '@/pages/client/MyData';
 import Cart from '@/pages/client/Cart';
+import Flow from '@/pages/client/flow';
 import ErrorPage from '@/pages/ErrorPage';
 
 Vue.use(Router);
@@ -52,6 +53,13 @@ let router = new Router({
           path: 'goods/:id',
           name: 'GoodsDetail',
           component: GoodsDetail
+        },{
+          path: 'flow',
+          name: 'Flow',
+          component: Flow,
+          meta: {
+            requireLogin:true,
+          },
         },{
           path: 'personal',
           name: 'Personal',
