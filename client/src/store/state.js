@@ -7,6 +7,10 @@ const state = {
   //客户商城
   clientName:getLocalItem('clientName')?getLocalItem('clientName'):'',
   clientToken:getLocalItem('clientToken')?getLocalItem('clientToken'):null,
+
+  //结算订单列表
+  orderLists:getLocalItem('orderLists')?JSON.parse(getLocalItem('orderLists')):'',
+
 }
 
 export default state;

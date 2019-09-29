@@ -1,0 +1,11 @@
+INSERT INTO `goodsdetails` VALUES (9, 5, '默认', 20, 300, '2019-9-27 01:50:34', '2019-9-27 01:50:34');
+INSERT INTO `goodsdetails` VALUES (10, 6, '默认', 198, 600, '2019-9-27 01:51:37', '2019-9-27 01:51:37');
+INSERT INTO `goodsdetails` VALUES (5, 4, '默认', 20, 80, '2019-9-27 01:43:58', '2019-9-27 01:43:58');
+INSERT INTO `goodsdetails` VALUES (6, 4, 'M', 19, 80, '2019-9-27 01:43:58', '2019-9-27 01:43:58');
+INSERT INTO `goodsdetails` VALUES (7, 4, 'S', 20, 80, '2019-9-27 01:43:58', '2019-9-27 01:43:58');
+INSERT INTO `goodsdetails` VALUES (8, 4, 'L', 19, 80, '2019-9-27 01:43:58', '2019-9-27 01:43:58');
+INSERT INTO `goodsdetails` VALUES (14, 10, '默认', 29, 6899, '2019-9-27 02:01:12', '2019-9-27 02:01:12');
+INSERT INTO `goodsdetails` VALUES (13, 9, '默认', 20, 9999, '2019-9-27 01:59:27', '2019-9-27 01:59:27');
+INSERT INTO `goodsdetails` VALUES (15, 11, '默认', -4, 8699, '2019-9-27 02:02:21', '2019-9-27 02:02:21');
+INSERT INTO `goodsdetails` VALUES (16, 12, '默认', 28, 9988, '2019-9-27 02:05:40', '2019-9-27 02:05:40');
+INSERT INTO `goodsdetails` VALUES (17, 13, '默认', 895, 199, '2019-9-27 02:08:51', '2019-9-27 02:08:51');

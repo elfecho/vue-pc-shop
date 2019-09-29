@@ -175,7 +175,7 @@ export function askGoodsMsg(data){
 	})
 }
 
-//加入购物车
+//加入订单（未付款）
 export function addOrder(data){
 	const res = axios.post('/api/mall/addOrder',data);
 	return new Promise((resolve,reject)=>{
@@ -228,6 +228,80 @@ export function getOrderByState(state,token){
 //删除订单
 export function deleteOrder(id){
 	const res = axios.delete('/api/mall/deleteOrder?id='+id);
+	return new Promise((resolve,reject)=>{
+		res
+		.then((result)=>{
+	        if(result.status===200){
+	        	return result.data;
+	        }else{
+	        	reject(result.status)
+	        }
+	    })
+	    .then((json)=>{
+    		if(json.code===0){
+                resolve();
+            }else{
+                reject(json.message);
+            }
+    	})
+	    .catch((e)=>{
+	    	reject(e.toString())
+	    })
+	})
+}
+
+// 获取用户购物车清单
+export function getCart(token){
+	const res = axios.get('/api/mall/getCart?token='+token);
+	return new Promise((resolve,reject)=>{
+		res
+		.then((result)=>{
+	        if(result.status===200){
+	        	return result.data;
+	        }else{
+	        	reject(result.status)
+	        }
+	    })
+	    .then((json)=>{
+    		if(json.code===0){
+                resolve(json.data);
+            }else{
+                reject(json.message);
+            }
+    	})
+	    .catch((e)=>{
+	    	reject(e.toString())
+	    })
+	})
+}
+
+//加入购物车
+export function addCart(data){
+	const res = axios.post('/api/mall/addCart',data);
+	return new Promise((resolve,reject)=>{
+		res
+		.then((result)=>{
+	        if(result.status===200){
+	        	return result.data;
+	        }else{
+	        	reject(result.status)
+	        }
+	    })
+	    .then((json)=>{
+    		if(json.code===0){
+                resolve();
+            }else{
+                reject(json.message);
+            }
+    	})
+	    .catch((e)=>{
+	    	reject(e.toString())
+	    })
+	})
+}
+//删除购物车
+export function deleteCart(id, token){
+	const res = axios.delete('/api/mall/deleteCart?id='+id+'&token='+token);
 	return new Promise((resolve,reject)=>{
 		res
 		.then((result)=>{

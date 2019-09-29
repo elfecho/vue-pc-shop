@@ -31,6 +31,12 @@ const mutations = {
 	    state.clientName = '';
 	    localStorage.removeItem('clientToken','clientName');
 	},
+
+	//订单列表
+	[types.SET_ORDER_LIST]:(state, orderLists) => {
+		state.orderLists = orderLists;
+		setLocalItem('orderLists',JSON.stringify(orderLists));
+	},
 }
 
 export default mutations;

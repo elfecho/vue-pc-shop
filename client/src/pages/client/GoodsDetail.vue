@@ -103,7 +103,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import {getGoodsInfo,getGoodsMsg,askGoodsMsg,addOrder,getComment,getGoodsList} from '../../api/client';
+import {getGoodsInfo,getGoodsMsg,askGoodsMsg,addCart,addOrder,getComment,getGoodsList} from '../../api/client';
 import NumberInput from '../../components/NumberInput';
 import Radio from '../../components/Radio';
 import GoodsItem from '../../components/GoodsItem';
@@ -231,10 +231,9 @@ export default {
         alert('请先登录！');
         return;
       }
-      const res = addOrder({
+      const res = addCart({
         token:this.clientToken,
         goodsDetailId:this.temSpecId,
-        state:0,
         num:this.num,
         amount:this.goodsPrice
       });

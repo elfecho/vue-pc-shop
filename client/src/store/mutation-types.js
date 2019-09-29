@@ -6,3 +6,5 @@ export const SET_CLIENT_TOKEN = 'SET_CLIENT_TOKEN';
 export const SET_CLIENT_NAME = 'SET_CLIENT_NAME';
 export const CLIENT_LOGOUT = 'CLIENT_LOGOUT';
 
+export const SET_ORDER_LIST = 'SET_ORDER_LIST'
+

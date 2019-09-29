@@ -40,4 +40,12 @@ router.get('/api/mall/getGoodsComment', goods.getGoodsComment);
 //关键词搜索商品
 router.get('/api/mall/searchGoods', goods.searchGoods);
 
+//添加进购物车
+router.post('/api/mall/addCart', goods.addCart);
+
+//购物清单
+router.get('/api/mall/getCart', goods.getCart);
+
+//删除购物清单
+router.delete('/api/mall/deleteCart', goods.deleteCart);
 module.exports = router;

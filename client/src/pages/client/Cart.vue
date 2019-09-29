@@ -28,7 +28,7 @@
             </span>
             <!-- <input @change="numberChange(item.id)" type="text" v-model="item.temGoodsNum" min="1" class="numInput" /> -->
             <span class="amount">{{'￥'+item.amount}}</span>
-            <button @click="deleteOrder(item.id)">删除</button>
+            <button @click="deleteCart(item.id)">删除</button>
           </div>
         </li>
       </ul>
@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import {getOrderByState,deleteOrder,settleAccounts} from '../../api/client';
+import { mapState, mapMutations } from 'vuex';
+import {getCart,deleteCart,settleAccounts} from '../../api/client';
 import NumberInput from '../../components/NumberInput';
 
 export default {
@@ -54,7 +54,8 @@ export default {
   },
   computed:{
     ...mapState([
-      'clientToken'
+      'clientToken',
+      'orderLists'
     ]),
     totalAmount(){
       let amount = 0;
@@ -71,8 +72,11 @@ export default {
   },
 
   methods:{
-    getOrderByState(state){
-      const res = getOrderByState(state,this.clientToken);
+    ...mapMutations({
+      setOrderList: 'SET_ORDER_LIST'
+    }),
+    getCart(){
+      const res = getCart(this.clientToken);
       res
       .then((data)=>{
         this.orderList=data;
@@ -88,12 +92,12 @@ export default {
       this.orderList.map((item,index)=>{
         if(orderId===item.id){
           item.amount = item.temGoodsNum*item.goods.unitPrice;
-      console.log(item.temGoodsNum,item.goods.unitPrice)
+          console.log(item.temGoodsNum,item.goods.unitPrice)
         }
       })
     },
-    deleteOrder(orderId){
-      const res = deleteOrder(orderId);
+    deleteCart(orderId){
+      const res = deleteCart(orderId, this.clientToken);
       res
       .then(()=>{
         alert('删除订单成功！');
@@ -109,29 +113,33 @@ export default {
     },
     settleAccounts(){
       let cartList = [];
-      this.orderList.map((item,index)=>{
-        cartList.push({
+      cartList = this.orderList.map((item,index)=>{
+        return {
           id:item.id,
           goodsNum:item.temGoodsNum,
-          amount:item.amount
-        })
+          amount:item.amount,
+          goods:item.goods
+        }
       });
-      const res = settleAccounts({
-        cartList:cartList
-      });
-      res
-      .then(()=>{
-        alert('下单成功！');
-        this.orderList = [];
-      })
-      .catch((e)=>{
-        alert(e);
-      })
+      // console.log('orderList', typeof cartList, cartList)
+      this.setOrderList(cartList)
+      this.navTo('/mall/flow')
+      // const res = settleAccounts({
+      //   cartList:cartList
+      // });
+      // res
+      // .then(()=>{
+      //   alert('下单成功！');
+      //   this.orderList = [];
+      // })
+      // .catch((e)=>{
+      //   alert(e);
+      // })
     }
   },
 
   mounted(){
-    this.getOrderByState(0);
+    this.getCart();
   },
 }
 </script>

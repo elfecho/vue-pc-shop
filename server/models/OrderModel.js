@@ -10,20 +10,32 @@ const OrderModel = sequelize.define('order',{
 	},
 	userId:{
 		type:Sequelize.BIGINT,
-		allowNull:false
+		allowNull:true
 	},
-	goodsDetailId:{
+	addrId: {
 		type:Sequelize.BIGINT,
+		allowNull:true
+	},
+	ordernum: {
+		type:Sequelize.STRING(60),
+		allowNull:true
+	},
+	remarks: {
+		type:Sequelize.STRING(255),
 		allowNull:false
 	},
-	goodsNum:{
-		type:Sequelize.INTEGER,
-		allowNull:false
-	},
-	amount:{
-		type:Sequelize.FLOAT,
-		allowNull:false
-	},
+	// goodsDetailId:{
+	// 	type:Sequelize.BIGINT,
+	// 	allowNull:false
+	// },
+	// goodsNum:{
+	// 	type:Sequelize.INTEGER,
+	// 	allowNull:false
+	// },
+	// amount:{
+	// 	type:Sequelize.FLOAT,
+	// 	allowNull:false
+	// },
 	/*0未付款，1已付款未发货，2已发货未确认收到，3确认到货订单完成*/
 	state:{
 		type:Sequelize.ENUM(0,1,2,3),

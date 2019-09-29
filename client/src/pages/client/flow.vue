@@ -42,7 +42,7 @@
 					<div class="payment-warp">
 						<div class="payment-list box">
 							<div class="p-radio-item payment-item item-selected">
-								<span>货到付款</span>
+								<span>在线支付</span>
 								<b></b>
 							</div>
 						</div>
@@ -91,33 +91,33 @@
 									</div>
 								</div>
 								<div class="ck-goods-cont">
-									<div class="cg-item box">
+									<div class="cg-item box" v-for="item of orderLists">
 										<div class="cg-name c-col">
 											<a href="" target="_blank">
 												<div class="p-img">
 													<img
-														src="http://www.zgstnfcp.cn/data/gallery_album/4/thumb_img/1529695529088372587.jpg"
+														:src="item.goods.img"
 														width="48"
 														height="48"
 													>
 												</div>
 												<div class="p-info">
-													<div class="p-name">菠萝啤</div>
-													<div class="p-attr"></div>
+													<div class="p-name">{{item.goods.name}}</div>
+													<div class="p-attr">{{item.goods.spec}}</div>
 												</div>
 											</a>
 										</div>
 										<div class="cg-price c-col">
 											<span class="fr cl">
-												<em>¥</em>66.00
+												<em>¥</em>{{item.goods.unitPrice}}
 											</span>
 										</div>
-										<div class="cg-number c-col">x1</div>
+										<div class="cg-number c-col">x{{item.goodsNum}}</div>
 										<div class="cg-state c-col">
 											<span>有货</span>
 										</div>
 										<div class="cg-sum c-col">
-											<em>¥</em>66.00
+											<em>¥</em>{{item.goods.unitPrice * item.goodsNum}}
 										</div>
 										<div class="cg-item-line c-col"></div>
 										<i class="dian"></i>
@@ -136,8 +136,7 @@
 							class="text"
 							placeholder="订单备注 限60个字"
 							autocomplete="off"
-							onblur="if(this.value==''||this.value=='订单备注 限60个字'){this.value='订单备注 限60个字';this.style.color='#cccccc'}"
-							onfocus="if(this.value=='订单备注 限60个字') {this.value='';};this.style.color='#666';"
+              v-model="remarks"
 						>
 						<span class="prompt">提示：请勿填写有关支付、收货、发票方面的信息</span>
 					</div>
@@ -152,20 +151,21 @@
 							<em>2</em>件商品，总商品金额：
 						</span>
 						<em class="price" id="warePriceId">
-							<em>¥</em>66.00
+							<em>¥</em>{{shopTotal}}
 						</em>
 					</div>
 					<div class="list">
 						<span>配送费用：</span>
 						<em class="price" id="freightPriceId">
-							+
-							<em>¥</em>4.30
+							<!-- +
+							<em>¥</em>5.00 -->
+              免配送费
 						</em>
 					</div>
 					<div class="list">
 						<span>应付总额：</span>
 						<em class="price-total">
-							<em>¥</em>70.30
+							<em>¥</em>{{shopTotal}}
 						</em>
 					</div>
 				</div>
@@ -173,7 +173,7 @@
 			<div class="checkout-foot" ectype="tfoot-toolbar">
 				<div class="w">
 					<div class="btn-area">
-						<input type="button" id="submit-done" class="submit-btn" value="提交订单">
+						<input type="button" id="submit-done" class="submit-btn" @click="handleSubmit" value="提交订单">
 					</div>
 					<div class="d-address">
 						<span id="sendAddr">寄送至：广东广州白云区嘉禾街道望岗高桥街4号盈通综合批发市场</span>
@@ -187,19 +187,29 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import { getAddrDate } from "../../api/client";
+import { getAddrDate, addOrder } from "../../api/client";
 export default {
   component: {},
   computed: {
-    ...mapState(["clientToken"])
+    ...mapState(["clientToken", "orderLists"]),
+    shopTotal() {
+      let total = 0
+      this.orderLists.map((item) => {
+        total+=item.goods.unitPrice * item.goodsNum
+      })
+      return total
+    }
   },
   data() {
     return {
-      addrList: []
+      addrList: [],
+      remarks: '',
+      addrId: ''
     };
   },
   mounted() {
     this.getAddrDate();
+    console.log(this.orderLists)
   },
   methods: {
     getAddrDate() {
@@ -208,13 +218,14 @@ export default {
         .then(data => {
           this.addrList = data;
           this.$set(this.addrList[0], "ischeckbox", true);
-          console.log(data);
+          this.addrId = this.addrList[0].id
+          // console.log(data);
         })
         .catch(e => {
           alert(e);
         });
     },
-    handleplan(item, id) {
+    handleplan(item) {
       const _this = this;
       this.$nextTick(function() {
         _this.addrList.forEach(function(item) {
@@ -223,6 +234,31 @@ export default {
         _this.$set(item, "ischeckbox", true);
       });
       this.$set(item, "ischeckbox", true);
+      this.addrId = item.id
+    },
+    handleSubmit(){
+      let goodsList = this.orderLists.map(item => {
+        return {
+          goodsDetailId: item.goods.goodsDetailId,
+          goodsNum: item.goodsNum,
+          amount: item.amount
+        }
+      })
+      const zdy = {
+        token:this.clientToken,
+        addrId: this.addrId,
+        goodsList: goodsList,
+        remarks: this.remarks,
+        state:0
+      }
+      console.log(zdy)
+      const res = addOrder(zdy)
+      res.then(data => {
+        console.log('data:::', data)
+      })
+
+
+
     }
   }
 };
